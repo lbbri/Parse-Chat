@@ -36,6 +36,7 @@
     PFObject *chatMessage = [PFObject objectWithClassName:@"Message_fbu2020"];
     
     chatMessage[@"text"] = self.chatMessageField.text;
+    chatMessage[@"user"] = PFUser.currentUser;
     
     [chatMessage saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if(succeeded)
@@ -65,8 +66,18 @@
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
    
     ChatCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ChatCell"];
-    NSDictionary *current = self.messagesArray[indexPath.row];
-    cell.messageLabel.text = current[@"text"];
+    NSDictionary *currentMessage = self.messagesArray[indexPath.row];
+    cell.messageLabel.text = currentMessage[@"text"];
+    PFUser *user = currentMessage[@"user"];
+    
+    if(user != nil)
+    {
+        cell.usernameLabel.text = user.username;
+    }
+    else
+    {
+        cell.usernameLabel.text = @";)";
+    }
     
     return cell;
 }
@@ -81,6 +92,7 @@
     
     //construct query
     PFQuery *query = [PFQuery queryWithClassName:@"Message_fbu2020"];
+    [query includeKey:@"user"];
     [query orderByDescending:@"createdAt"];
     
     //fetch data asynchronously

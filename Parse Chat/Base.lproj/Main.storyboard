@@ -91,29 +91,42 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ChatCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChatCell" id="12d-Sk-SJY" customClass="ChatCell">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="59"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ChatCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChatCell" rowHeight="89" id="12d-Sk-SJY" customClass="ChatCell">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="89"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="12d-Sk-SJY" id="UtV-nI-Wmq">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="59"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="89"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Past chat messages will appear hear." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lyd-KY-E0P">
-                                                    <rect key="frame" x="28" y="19" width="374" height="21"/>
+                                                    <rect key="frame" x="28" y="48" width="374" height="22"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dPB-Bs-e0c">
+                                                    <rect key="frame" x="28" y="19" width="358" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="0KU-KH-GHl"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="dPB-Bs-e0c" secondAttribute="trailing" constant="8" id="1pL-O4-Lv9"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="lyd-KY-E0P" secondAttribute="bottom" constant="8" id="9wt-x8-QOY"/>
                                                 <constraint firstItem="lyd-KY-E0P" firstAttribute="trailing" secondItem="UtV-nI-Wmq" secondAttribute="trailingMargin" constant="8" id="CDq-Qk-UbD"/>
+                                                <constraint firstItem="dPB-Bs-e0c" firstAttribute="leading" secondItem="UtV-nI-Wmq" secondAttribute="leadingMargin" constant="8" id="FCZ-uA-mLm"/>
+                                                <constraint firstItem="lyd-KY-E0P" firstAttribute="top" secondItem="dPB-Bs-e0c" secondAttribute="bottom" constant="8" id="HHS-xH-98H"/>
                                                 <constraint firstItem="lyd-KY-E0P" firstAttribute="leading" secondItem="UtV-nI-Wmq" secondAttribute="leadingMargin" constant="8" id="aMT-3T-Ysf"/>
-                                                <constraint firstItem="lyd-KY-E0P" firstAttribute="top" secondItem="UtV-nI-Wmq" secondAttribute="topMargin" constant="8" id="wbe-zZ-yQa"/>
+                                                <constraint firstItem="dPB-Bs-e0c" firstAttribute="top" secondItem="UtV-nI-Wmq" secondAttribute="topMargin" constant="8" id="ePH-Yz-Rad"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="messageLabel" destination="lyd-KY-E0P" id="MOT-Vz-ueh"/>
+                                            <outlet property="usernameLabel" destination="dPB-Bs-e0c" id="kfL-1v-bgV"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

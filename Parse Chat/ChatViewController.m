@@ -7,10 +7,13 @@
 //
 
 #import "ChatViewController.h"
+#import "ChatCell.h"
 #import <Parse/Parse.h>
 
-@interface ChatViewController ()
+@interface ChatViewController () <UITableViewDataSource, UITableViewDelegate>
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UITextField *chatMessageField;
+@property (strong, nonatomic) NSMutableArray *messagesArray;
 
 @end
 
@@ -18,6 +21,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    
+    [NSTimer scheduledTimerWithTimeInterval:.1 target:self selector:@selector(refreshChat) userInfo:nil repeats:true];
+    //[self.tableView reloadData];
+
+
     // Do any additional setup after loading the view.
 }
 - (IBAction)sendTap:(id)sender {
@@ -47,5 +59,47 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+
+
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+   
+    ChatCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ChatCell"];
+    NSDictionary *current = self.messagesArray[indexPath.row];
+    cell.messageLabel.text = current[@"text"];
+    
+    return cell;
+}
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+
+    return self.messagesArray.count;
+}
+
+
+- (void)refreshChat{
+    
+    //construct query
+    PFQuery *query = [PFQuery queryWithClassName:@"Message_fbu2020"];
+    [query orderByDescending:@"createdAt"];
+    
+    //fetch data asynchronously
+    [query findObjectsInBackgroundWithBlock:^(NSArray *  messages, NSError *  error) {
+        if(messages != nil)
+        {
+            //do something with array
+            self.messagesArray = (NSMutableArray *)messages;
+            [self.tableView reloadData];
+            
+        }
+        else
+        {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+    
+    
+}
+
 
 @end

@@ -66,9 +66,9 @@
            }
            else
            {
-               NSLog(@"User Signed Up");
+               //NSLog(@"User Signed Up");
                
-               //manually segue to Logged in view
+               [self performSegueWithIdentifier:@"loginSegue" sender:nil];
            }
         }];
         
@@ -116,7 +116,8 @@
             }
             else
             {
-                NSLog(@"User logged in successfully");
+                //NSLog(@"User logged in successfully");
+                [self performSegueWithIdentifier:@"loginSegue" sender:nil];
             }
         }];
         
